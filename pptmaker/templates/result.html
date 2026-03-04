@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>Academic Dictionary - Offline</title>
+    <style>
+        body { font-family: 'Georgia', serif; background: #f4f7f9; padding: 40px; }
+        .card {
+            background: white; max-width: 900px; margin: 0 auto 30px auto;
+            padding: 40px; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            position: relative;
+        }
+        .header { display: flex; align-items: baseline; border-bottom: 2px solid #1a2a6c; padding-bottom: 10px; margin-bottom: 25px; }
+        .word { font-size: 56px; font-weight: bold; color: #1a2a6c; margin: 0; }
+        .phonetic { font-family: 'Arial'; color: #666; font-size: 24px; margin-left: 20px; }
+        .play-btn {
+            background: #1a2a6c; color: white; border: none; width: 40px; height: 40px;
+            border-radius: 50%; cursor: pointer; margin-left: 15px; font-size: 18px;
+            transition: transform 0.2s;
+        }
+        .play-btn:hover { transform: scale(1.1); }
+
+        .pos { color: #d35400; font-style: italic; font-weight: bold; margin-top: 20px; font-size: 1.1em; display: block; }
+        .meaning-item { border-left: 3px solid #eee; padding-left: 20px; margin: 15px 0; }
+        .en-def { font-size: 19px; font-weight: 500; color: #333; }
+        .zh-def { color: #1a2a6c; font-family: "Microsoft YaHei"; margin-top: 5px; }
+        .example-box { margin-top: 10px; font-size: 16px; color: #555; background: #f9f9f9; padding: 10px; border-radius: 5px; }
+        .zh-ex { font-family: "Microsoft YaHei"; color: #888; font-size: 14px; margin-top: 3px; }
+
+        .idiom-section { margin-top: 30px; border-top: 1px dashed #ccc; padding-top: 20px; }
+        .idiom-label { font-weight: bold; color: #1a2a6c; }
+        .idiom-zh { font-family: "Microsoft YaHei"; color: #444; display: block; }
+    </style>
+</head>
+<body>
+
+{% for word in results %}
+<div class="card">
+    <div class="header">
+        <h1 class="word">{{ word.word }}</h1>
+        <span class="phonetic">[{{ word.phonetic }}]</span>
+        {% if word.audio %}
+        <button class="play-btn" onclick="document.getElementById('aud-{{loop.index}}').play()">▶</button>
+        <audio id="aud-{{loop.index}}" src="{{ word.audio }}"></audio>
+        {% endif %}
+    </div>
+
+    {% for m in word.meanings %}
+    <span class="pos">{{ m.pos }}</span>
+    <div class="meaning-item">
+        <div class="en-def">{{ m.en_def }}</div>
+        <div class="zh-def">{{ m.zh_def }}</div>
+        {% if m.en_ex %}
+        <div class="example-box">
+            • <em>"{{ m.en_ex }}"</em>
+            <div class="zh-ex">{{ m.zh_ex }}</div>
+        </div>
+        {% endif %}
+    </div>
+    {% endfor %}
+
+    <div class="idiom-section">
+        <span class="idiom-label">Idiom:</span> <span>{{ word.idiom }}</span>
+        <span class="idiom-zh">{{ word.idiom_zh }}</span>
+    </div>
+</div>
+{% endfor %}
+
+</body>
+</html>

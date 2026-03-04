@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Academic Lexicon Creator</title>
+    <style>
+        body { font-family: 'Georgia', serif; background: #f4f1ea; display: flex; justify-content: center; padding: 50px; }
+        .container { background: white; padding: 40px; border-radius: 2px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); width: 100%; max-width: 600px; border-top: 5px solid #2c3e50; }
+        h2 { color: #2c3e50; text-align: center; border-bottom: 1px solid #eee; padding-bottom: 10px; }
+        textarea { width: 100%; height: 120px; border: 1px solid #ddd; padding: 10px; margin: 20px 0; font-family: inherit; }
+        input[type="file"] { margin-bottom: 20px; }
+        button { width: 100%; background: #2c3e50; color: white; border: none; padding: 15px; cursor: pointer; font-size: 16px; transition: 0.3s; }
+        button:hover { background: #34495e; }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h2>Academic Lexicon Creator</h2>
+    <form method="POST" enctype="multipart/form-data">
+        <p>Enter words separated by commas or newlines:</p>
+        <textarea name="words" placeholder="e.g. Ephemeral, Resilience, Serendipity"></textarea>
+        <p>Or upload a .txt file:</p>
+        <input type="file" name="file" accept=".txt">
+        <button type="submit">Generate Academic Dictionary</button>
+    </form>
+</div>
+</body>
+</html>

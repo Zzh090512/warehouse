@@ -1,0 +1,10 @@
+Flask
+Flask-SQLAlchemy
+openai
+markdown
+pdfkit
+easyocr
+Werkzeug
+Flask-login
+pandas
+openpyxl

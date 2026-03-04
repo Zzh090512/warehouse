@@ -1,0 +1,50 @@
+{% extends "layout.html" %}
+{% block content %}
+<div class="row">
+    <div class="col-md-6">
+        <div class="card shadow-sm mb-4">
+            <div class="card-body">
+                <h5 class="card-title mb-3">🚀 提交新作文</h5>
+                <form method="POST">
+                    <div class="mb-3">
+                        <label class="form-label">练习编号 / 标题</label>
+                        <input type="text" name="task_id" class="form-control" placeholder="如：Unit 2 单元测试" required>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">写作模式</label>
+                        <select name="mode" class="form-select">
+                            <option value="15">普通短文 (15分制)</option>
+                            <option value="25">读后续写 (25分制)</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">题目要求</label>
+                        <textarea name="topic" class="form-control" rows="3" placeholder="粘贴题目内容..."></textarea>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">作文正文</label>
+                        <textarea name="content" class="form-control" rows="10" placeholder="在此输入你的英语作文..." required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary w-100">提交批改</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-6">
+        <div class="card shadow-sm border-0 bg-light" style="min-height: 600px;">
+            <div class="card-body">
+                <h5 class="card-title text-primary">AI 批改报告</h5>
+                <hr>
+                <div id="result">
+                    {% if result %}
+                    {{ result | safe }}
+                    {% else %}
+                    <p class="text-muted">完成左侧内容并提交，AI 将立即为您评分。</p>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

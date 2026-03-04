@@ -1,0 +1,61 @@
+{% extends "layout.html" %}
+{% block content %}
+<h2>班级作文统一管理后台</h2>
+<hr>
+
+<form class="row g-3 mb-4" method="GET">
+    <div class="col-md-4">
+        <input type="text" name="sid" class="form-control" placeholder="搜索学号"
+               value="{{ request.args.get('sid','') }}">
+    </div>
+    <div class="col-md-4">
+        <button type="submit" class="btn btn-primary">筛选</button>
+        <a href="/admin" class="btn btn-outline-secondary">重置</a>
+    </div>
+</form>
+
+<div class="card mb-4 border-success">
+    <div class="card-body">
+        <h6 class="card-title text-success">批量导入作文 (图片/TXT)</h6>
+        <form action="/batch_submit" method="POST" enctype="multipart/form-data" class="row g-3">
+            <div class="col-md-4">
+                <input type="file" name="files" class="form-control" multiple>
+            </div>
+            <div class="col-md-3">
+                <select name="mode" class="form-select">
+                    <option value="15">应用文(15分)</option>
+                    <option value="25">续写(25分)</option>
+                </select>
+            </div>
+            <div class="col-md-2">
+                <button type="submit" class="btn btn-success w-100">开始处理</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<table class="table table-hover bg-white shadow-sm">
+    <thead class="table-dark">
+    <tr>
+        <th>学生学号</th>
+        <th>练习编号</th>
+        <th>得分</th>
+        <th>提交时间</th>
+        <th>操作</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for essay in essays %}
+    <tr>
+        <td><strong>{{ essay.author.username }}</strong></td>
+        <td><span class="badge bg-info text-dark">{{ essay.task_id }}</span></td>
+        <td><strong class="text-danger">{{ essay.score }}</strong></td>
+        <td>{{ essay.created_at.strftime('%Y-%m-%d %H:%M') }}</td>
+        <td>
+            <a href="/history?uid={{ essay.user_id }}" class="btn btn-sm btn-outline-primary">分析报告</a>
+        </td>
+    </tr>
+    {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

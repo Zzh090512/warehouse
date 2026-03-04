@@ -1,0 +1,26 @@
+{% extends "layout.html" %}
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-4">
+        <div class="card shadow">
+            <div class="card-body">
+                <h3 class="card-title text-center mb-4">用户登录</h3>
+                <form method="POST">
+                    <div class="mb-3">
+                        <label class="form-label">学号 / 管理员账号</label>
+                        <input type="text" name="username" class="form-control" required>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">密码</label>
+                        <input type="password" name="password" class="form-control" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary w-100">进入系统</button>
+                </form>
+                <div class="mt-3 text-muted small">
+                    * 教师账号请使用默认 admin 登录。
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
